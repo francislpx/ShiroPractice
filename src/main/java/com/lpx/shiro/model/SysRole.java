@@ -1,5 +1,7 @@
 package com.lpx.shiro.model;
 
+import java.util.List;
+
 public class SysRole {
     private Long id;
 
@@ -8,6 +10,16 @@ public class SysRole {
     private String description;
 
     private Boolean available;
+
+    private List<SysResource> resourceList;
+    
+    public List<SysResource> getResourceList() {
+        return resourceList;
+    }
+
+    public void setResourceList(List<SysResource> resourceList) {
+        this.resourceList = resourceList;
+    }
 
     public Long getId() {
         return id;

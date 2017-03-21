@@ -11,19 +11,38 @@
     <result column="permission" jdbcType="VARCHAR" property="permission" />
     <result column="available" jdbcType="BIT" property="available" />
   </resultMap>
+  
   <sql id="Base_Column_List">
     id, name, type, url, parent_id, parent_ids, permission, available
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_resource
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="getResourceByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select t1.id, t1.name, t1.type, t1.url, t1.parent_id, t1.parent_ids, t1.permission
+    from sys_resource t1
+    right join sys_role_resource t2 on t1.id = t2.resource_id
+    where t2.role_id = #{id,jdbcType=BIGINT} 
+  </select>
+
+  <select id="getResourceByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select distinct t1.id, t1.name, t1.type, t1.url, t1.parent_id, t1.parent_ids, t1.permission
+    from sys_resource t1
+    right join sys_role_resource t2 on t1.id = t2.resource_id
+    right join sys_user_role t3 on t2.role_id = t3.role_id
+    where t3.user_id = #{id,jdbcType=BIGINT} 
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  
   <insert id="insert" parameterType="com.lpx.shiro.model.SysResource">
     insert into sys_resource (id, name, type, 
       url, parent_id, parent_ids, 
@@ -32,6 +51,7 @@
       #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{parentIds,jdbcType=VARCHAR}, 
       #{permission,jdbcType=VARCHAR}, #{available,jdbcType=BIT})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.lpx.shiro.model.SysResource">
     insert into sys_resource
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -87,6 +107,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.lpx.shiro.model.SysResource">
     update sys_resource
     <set>
@@ -114,6 +135,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.lpx.shiro.model.SysResource">
     update sys_resource
     set name = #{name,jdbcType=VARCHAR},
@@ -125,4 +147,5 @@
       available = #{available,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
 </mapper>

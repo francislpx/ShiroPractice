@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lpx.shiro.dao.SysRoleMapper">
+  
   <resultMap id="BaseResultMap" type="com.lpx.shiro.model.SysRole">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="role" jdbcType="VARCHAR" property="role" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="available" jdbcType="BIT" property="available" />
   </resultMap>
+  
   <sql id="Base_Column_List">
     id, role, description, available
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_role
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="getRoleByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select t1.id,t1.role
+    from sys_role t1
+    right join sys_user_role t2 on t1.id = t2.role_id  
+    where t2.user_id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="getRoleByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select t1.id, t1.role
+    from sys_role t1
+    right join sys_user_role t2 on t1.id = t2.role_id 
+    right join sys_user t3 on t2.id = t2.user_id 
+    where t3.user_name = #{username,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from sys_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  
   <insert id="insert" parameterType="com.lpx.shiro.model.SysRole">
     insert into sys_role (id, role, description, 
       available)
     values (#{id,jdbcType=BIGINT}, #{role,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{available,jdbcType=BIT})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.lpx.shiro.model.SysRole">
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -57,6 +78,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.lpx.shiro.model.SysRole">
     update sys_role
     <set>
@@ -72,6 +94,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.lpx.shiro.model.SysRole">
     update sys_role
     set role = #{role,jdbcType=VARCHAR},
@@ -79,4 +102,5 @@
       available = #{available,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
 </mapper>
