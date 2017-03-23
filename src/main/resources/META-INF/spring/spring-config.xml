@@ -5,24 +5,25 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
-          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+          http://www.springframework.org/schema/beans 
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/aop 
+          http://www.springframework.org/schema/aop/spring-aop.xsd
+          http://www.springframework.org/schema/tx 
+          http://www.springframework.org/schema/tx/spring-tx.xsd
+          http://www.springframework.org/schema/context 
+          http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder location="classpath:configure.properties"/>
-
-	<!-- 扫描注解Bean -->
-    <context:component-scan base-package="com.lpx.shiro">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	
+	<context:component-scan base-package="com.lpx.shiro">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-
+    
     <!-- 开启AOP监听 只对当前配置文件有效 -->
-    <aop:aspectj-autoproxy expose-proxy="true"/>
-
+    <!-- <aop:aspectj-autoproxy expose-proxy="true"/> -->
 
     <!-- 数据源 -->
-    <!--see https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
         <property name="url" value="${connection.url}"/>
@@ -59,7 +60,8 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource" />  
         <!-- 自动扫描mapping.xml文件 -->  
-        <property name="mapperLocations" value="classpath:com/lpx/shiro/dao/mapper/*.xml"></property>  
+        <property name="mapperLocations" value="classpath*:com/lpx/shiro/dao/mapper/*.xml"></property>  
+        <!-- <property name="typeAliasesPackage" value="com.lpx.shiro.model" />  -->
     </bean>  
   
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
@@ -94,7 +96,9 @@
     </aop:config>
 
     <!-- <bean class="com.github.zhangkaitao.shiro.spring.SpringUtils"/> -->
-
+	
+	<tx:annotation-driven/>
+	
     <import resource="classpath:META-INF/spring/spring-cache.xml"/>
     <import resource="classpath:META-INF/spring/spring-shiro.xml"/>
 </beans>

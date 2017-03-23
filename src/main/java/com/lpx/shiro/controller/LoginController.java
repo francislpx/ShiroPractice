@@ -20,6 +20,7 @@ public class LoginController {
     
     @RequestMapping
     public String showLoginForm(HttpServletRequest req, Model model) {
+        
         String exceptionClassName = (String)req.getAttribute("shiroLoginFailure");
         String error = null;
         if(UnknownAccountException.class.getName().equals(exceptionClassName)) {

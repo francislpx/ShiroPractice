@@ -11,19 +11,19 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- <context:property-placeholder location="classpath:configure.properties"/> -->
-
+    <context:property-placeholder location="classpath:configure.properties"/>
 	
+    <mvc:annotation-driven/>
+
     <!-- 开启controller注解支持 -->
     <!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
-    <context:component-scan base-package="com.lpx.shiro.controller" use-default-filters="false">
+    <context:component-scan base-package="com.lpx.shiro" use-default-filters="false">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation"
                                 expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
-	
-	<mvc:annotation-driven/>
+    
     <!-- <mvc:annotation-driven>
         <mvc:argument-resolvers>
             <bean class="com.lpx.shiro.bind.method.CurrentUserMethodArgumentResolver"/>
@@ -35,7 +35,6 @@
 
     <!-- 静态资源映射 -->
     <mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>
-
 
     <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"

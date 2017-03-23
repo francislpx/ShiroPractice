@@ -11,10 +11,10 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lpx.shiro.model.SysUser;
 import com.lpx.shiro.service.SysUserService;
-import com.lpx.shiro.service.impl.SysUserServiceImpl;
 
 /**
  * @ClassName UserRealm
@@ -24,13 +24,14 @@ import com.lpx.shiro.service.impl.SysUserServiceImpl;
  */
 public class UserRealm extends AuthorizingRealm {
 
-    private SysUserService userService = new SysUserServiceImpl();
+    @Autowired
+    private SysUserService sysUserService;
     
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String userName = (String) principals.getPrimaryPrincipal();
-        SysUser user = userService.getUserWithRoleByUserName(userName);
+        SysUser user = sysUserService.getUserWithRoleByUserName(userName);
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         authorizationInfo.setRoles(user.getRoleSet());
         authorizationInfo.addStringPermissions(user.getPermissionSet());
@@ -43,7 +44,7 @@ public class UserRealm extends AuthorizingRealm {
             throws AuthenticationException {
         
         String userName = (String) token.getPrincipal();
-        SysUser user = userService.getUserByUserName(userName);
+        SysUser user = sysUserService.getUserByUserName(userName);
         
         if(user == null) {
             throw new UnknownAccountException();//没找到帐号

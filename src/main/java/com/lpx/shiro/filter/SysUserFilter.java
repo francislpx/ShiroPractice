@@ -18,13 +18,13 @@ import com.lpx.shiro.service.SysUserService;
 public class SysUserFilter extends PathMatchingFilter {
 
     @Autowired
-    private SysUserService userService;
+    private SysUserService sysUserService;
 
     @Override
     protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
 
         String username = (String) SecurityUtils.getSubject().getPrincipal();
-        request.setAttribute(Constants.CURRENT_USER, userService.getUserByUserName(username));
+        request.setAttribute(Constants.CURRENT_USER, sysUserService.getUserByUserName(username));
         return true;
     }
 }

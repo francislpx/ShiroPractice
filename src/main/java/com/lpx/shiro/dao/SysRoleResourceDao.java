@@ -1,7 +1,10 @@
 package com.lpx.shiro.dao;
 
+import org.springframework.stereotype.Repository;
+
 import com.lpx.shiro.model.SysRoleResource;
 
+@Repository
 public interface SysRoleResourceDao {
     int deleteByPrimaryKey(Long id);
 
