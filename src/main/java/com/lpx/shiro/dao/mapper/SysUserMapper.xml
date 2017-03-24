@@ -29,11 +29,11 @@
     limit 0,1
   </select>
 
-  <select id="getUserList" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="getUserListByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from sys_user
-    <if test="username != null">
+    <if test="username != null and username !='' ">
     	where username like '%#{username,jdbcType=VARCHAR}%'
     </if>
     

@@ -66,8 +66,8 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public List<SysUser> getUserList(String username) {
-        return sysUserDao.getUserList(username);
+    public List<SysUser> getUserListByName(String username) {
+        return sysUserDao.getUserListByName(username);
     }
 
     @Override

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="zhangfn" uri="http://github.com/zhangkaitao/tags/zhang-functions" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
@@ -21,8 +20,8 @@
     <thead>
         <tr>
             <th>用户名</th>
-            <th>所属组织</th>
-            <th>角色列表</th>
+           <!--  <th>所属组织</th>
+            <th>角色列表</th> -->
             <th>操作</th>
         </tr>
     </thead>
@@ -30,8 +29,8 @@
         <c:forEach items="${userList}" var="user">
             <tr>
                 <td>${user.username}</td>
-                <td>${zhangfn:organizationName(user.organizationId)}</td>
-                <td>${zhangfn:roleNames(user.roleIds)}</td>
+                <%-- <td>${zhangfn:organizationName(user.organizationId)}</td> --%>
+                <%-- <td>${zhangfn:roleNames(user.roleIds)}</td> --%>
                 <td>
                     <shiro:hasPermission name="user:update">
                         <a href="${pageContext.request.contextPath}/user/${user.id}/update">修改</a>

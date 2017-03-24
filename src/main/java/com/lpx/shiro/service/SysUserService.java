@@ -16,7 +16,7 @@ public interface SysUserService {
     public void addUser(SysUser user);
     public void changePassword(Long userId, String newPassword);
     public void updateUser(SysUser user);
-    public List<SysUser> getUserList(String username);
+    public List<SysUser> getUserListByName(String username);
     public Set<String> getRoleListByUserName(String username);
     
     //根据用户名查询用户，同时查询角色和权限

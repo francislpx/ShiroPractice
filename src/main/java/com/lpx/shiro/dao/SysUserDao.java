@@ -20,7 +20,7 @@ public interface SysUserDao {
 
     int updateByPrimaryKey(SysUser record);
 
-    List<SysUser> getUserList(String username);
+    List<SysUser> getUserListByName(String username);
 
     SysUser selectByUserName(String username);
 }

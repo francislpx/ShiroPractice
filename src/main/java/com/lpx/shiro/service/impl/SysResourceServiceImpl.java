@@ -49,6 +49,9 @@ public class SysResourceServiceImpl implements SysResourceService{
     public List<SysResource> getMenuByPermission(Set<String> permissions) {
         List<SysResource> allResources = getAllResource();
         List<SysResource> menus = new ArrayList<SysResource>();
+        //1、查出所有资源（menu、button等）
+        //2、遍历资源：如果一个资源是menu类型的，遍历用户所有权限，判断用户的权限是否包含在menu里面，若有，则显示该menu
+        //（比如有个menu是 用户管理，用户管理下面还有用户查看、用户新增两个子资源，如果用户有两个子资源中的任何一个，用户管理menu需要显示）
         for(SysResource resource : allResources) {
             if(resource.isRootNode()) {
                 continue;
