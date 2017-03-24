@@ -20,6 +20,8 @@ public interface SysResourceDao {
 
     int updateByPrimaryKey(SysResource record);
     
+    List<SysResource> getAllResource();
+
     List<SysResource> getResourceByRoleId(Long roleId);
 
     List<SysResource> getResourceByUserId(Long id);

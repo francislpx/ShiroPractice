@@ -23,6 +23,12 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="getAllResource" resultMap="BaseResultMap">
+    select t1.id, t1.name, t1.type, t1.url, t1.parent_id, t1.parent_ids, t1.permission
+    from sys_resource t1
+    where t1.available=1
+  </select>
+
   <select id="getResourceByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select t1.id, t1.name, t1.type, t1.url, t1.parent_id, t1.parent_ids, t1.permission
     from sys_resource t1

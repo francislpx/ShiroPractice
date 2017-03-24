@@ -5,7 +5,7 @@ public class SysResource {
 
     private String name;
 
-    private String type;
+    private ResourceType type = ResourceType.menu; 
 
     private String url;
 
@@ -16,7 +16,24 @@ public class SysResource {
     private String permission;
 
     private Boolean available;
+    
+    public boolean isRootNode() {
+        return parentId == 0;
+    }
+    
+    public static enum ResourceType {
+        menu("菜单"), button("按钮");
 
+        private final String info;
+        private ResourceType(String info) {
+            this.info = info;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+    }
+    
     public Long getId() {
         return id;
     }
@@ -33,12 +50,12 @@ public class SysResource {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getType() {
+    public ResourceType getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setType(ResourceType type) {
+        this.type = type;
     }
 
     public String getUrl() {

@@ -20,10 +20,14 @@ public class SysUserFilter extends PathMatchingFilter {
     @Autowired
     private SysUserService sysUserService;
 
+    /* 
+     * 在进入controller前，取到登录用户的信息，放在request中
+     */
     @Override
     protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-
+        
         String username = (String) SecurityUtils.getSubject().getPrincipal();
+//        request.setAttribute(Constants.CURRENT_USER, sysUserService.getUserWithRoleByUserName(username));
         request.setAttribute(Constants.CURRENT_USER, sysUserService.getUserByUserName(username));
         return true;
     }
