@@ -8,7 +8,7 @@
 <iframe name="content" class="ui-layout-center" src="/welcome" frameborder="0" scrolling="auto"></iframe>
 <div class="ui-layout-north">欢迎[$shiro.getPrincipal()]学习Shiro综合案例，<a href="/logout">退出</a></div>
 <div class="ui-layout-south">
-    获取源码：<a href="https://github.com/zhangkaitao/shiro-example" target="_blank">https://github.com/zhangkaitao/shiro-example</a>
+    获取源码：<a href="https://github.com/francislpx/ShiroPractice" target="_blank">https://github.com/francislpx/ShiroPractice</a>
 </div>
 <div class="ui-layout-west">
     功能菜单<br/>
