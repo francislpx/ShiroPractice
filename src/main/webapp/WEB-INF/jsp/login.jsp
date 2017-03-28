@@ -2,7 +2,6 @@
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
-	<link rel="icon" href="data:;base64,=">
     <title>登录</title>
     <style>.error{color:red;}</style>
 </head>
