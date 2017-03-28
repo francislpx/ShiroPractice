@@ -18,17 +18,25 @@
         <property name="cacheManager" ref="springCacheManager"/>
     </bean>
 
-    <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher" class="com.lpx.shiro.credentials.RetryLimitHashedCredentialsMatcher">
+    <!-- 凭证匹配器(有密码错误重试限制) -->
+    <!-- <bean id="credentialsMatcher" class="com.lpx.shiro.credentials.RetryLimitHashedCredentialsMatcher">
         <constructor-arg  ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
-    </bean>
+    </bean> -->
+
+	<bean id="hashedCredentialsMatcher"  
+	    class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">  
+	        <property name="hashAlgorithmName" value="MD5" />  
+	        <property name="storedCredentialsHexEncoded" value="true" /> 
+	        <property name="hashIterations" value="2" />  
+	</bean>
 
     <!-- Realm实现 -->
     <bean id="userRealm" class="com.lpx.shiro.realm.UserRealm">
-        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+        <!-- <property name="credentialsMatcher" ref="credentialsMatcher"/> -->
+        <property name="credentialsMatcher" ref="hashedCredentialsMatcher"/>
         <property name="cachingEnabled" value="false"/>
         <!--<property name="authenticationCachingEnabled" value="true"/>-->
         <!--<property name="authenticationCacheName" value="authenticationCache"/>-->
