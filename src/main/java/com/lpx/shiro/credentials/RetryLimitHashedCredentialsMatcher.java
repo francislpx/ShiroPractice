@@ -1,13 +1,13 @@
 package com.lpx.shiro.credentials;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @ClassName RetryLimitHashedCredentialsMatcher
@@ -25,7 +25,9 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
+        
         String username = (String)token.getPrincipal();
+        //info.getCredentials(); //数据库密码
         //retry count + 1
         AtomicInteger retryCount = passwordRetryCache.get(username);
         if(retryCount == null) {
