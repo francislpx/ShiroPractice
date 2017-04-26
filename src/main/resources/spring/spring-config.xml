@@ -99,6 +99,9 @@
 	
 	<tx:annotation-driven/>
 	
+	<!-- swagger -->
+	<bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
+	
     <import resource="classpath:spring/spring-cache.xml"/>
     <import resource="classpath:spring/spring-shiro.xml"/>
 </beans>

@@ -14,7 +14,6 @@
     <context:property-placeholder location="classpath:configure.properties"/>
 	
     <mvc:annotation-driven/>
-	<bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
     
     <!-- 开启controller注解支持 -->
     <!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
@@ -63,7 +62,6 @@
             </props>  
         </property>  
     </bean>  --> 
-
 
     <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
     <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
