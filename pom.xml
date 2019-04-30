@@ -10,7 +10,7 @@
 
 	<properties>
 		<!-- 在spring的依赖中，我们需要引用一系列版本的spring。每次都写不利于维护。 -->
-		<spring.version>4.3.6.RELEASE</spring.version>
+		<spring.version>4.3.23.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
 		<!-- shiro 版本 -->
@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3.1</version>
+			<version>1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
