@@ -19,7 +19,7 @@
 		<slf4j.version>1.7.24</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 		<!-- jackson版本 -->
-		<version.jackson>2.8.7</version.jackson>
+		<version.jackson>2.9.8</version.jackson>
 		<!-- 文件拷贝时的编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
